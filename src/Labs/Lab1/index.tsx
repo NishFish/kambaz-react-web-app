@@ -291,7 +291,7 @@ export default function Lab1() {
           Please <a href="https://www.lipsum.com" id="wd-lipsum">click here</a>
           to get dummy text<br/>
 
-          <a href="https://github.com/NishFish" id="wd-lipsum">click here</a> to reach my GitHub repository!<br/>
+          <a href="https://github.com/NishFish" id="wd-github">click here</a> to reach my GitHub repository!<br/>
         </div>
 
         
