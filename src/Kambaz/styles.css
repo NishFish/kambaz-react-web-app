@@ -31,3 +31,50 @@ body * {
 #wd-account-link:focus .fs-1 {
     color: grey !important;
 }
+
+.wd-dashboard-course {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: "270px";
+    --bs-gutter-x: 30px;
+    --bs-gutter-y: 30px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.card img {
+    margin: 0 auto;
+}
+
+.card-text,
+.card-title {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 225px;
+    overflow: hidden;
+}
+
+.card-text {
+    font-size: 0.9rem
+}
+
+.btn-primary {
+    margin-top: -5px;
+}

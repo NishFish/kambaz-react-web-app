@@ -4,7 +4,6 @@ import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
 import { FaInbox, FaRegCircleUser } from "react-icons/fa6";
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
-import { NavLink } from "react-bootstrap";
 
 export default function KambazNavigation() {
   return (
@@ -27,7 +26,7 @@ export default function KambazNavigation() {
       <Nav variant="pills" className="flex-column">
         <Nav.Item>
           <Nav.Link
-            as={NavLink}
+            as={Link}
             to="/Kambaz/Account"
             id="wd-account-link"
             className="list-group-item text-center border-0 bg-black text-white"
@@ -42,7 +41,7 @@ export default function KambazNavigation() {
 
         <Nav.Item>
           <Nav.Link
-            as={NavLink}
+            as={Link}
             to="/Kambaz/Dashboard"
             id="wd-dashboard-link"
             className="list-group-item text-center border-0 bg-black text-white"
@@ -57,7 +56,7 @@ export default function KambazNavigation() {
 
         <Nav.Item>
           <Nav.Link
-            as={NavLink}
+            as={Link}
             to="/Kambaz/Dashboard"
             id="wd-course-link"
             className="list-group-item text-center border-0 bg-black text-white"
@@ -72,7 +71,7 @@ export default function KambazNavigation() {
 
         <Nav.Item>
           <Nav.Link
-            as={NavLink}
+            as={Link}
             to="/Kambaz/Calendar"
             id="wd-calendar-link"
             className="list-group-item text-center border-0 bg-black text-white"
@@ -87,7 +86,7 @@ export default function KambazNavigation() {
 
         <Nav.Item>
           <Nav.Link
-            as={NavLink}
+            as={Link}
             to="/Kambaz/Inbox"
             id="wd-inbox-link"
             className="list-group-item text-center border-0 bg-black text-white"
@@ -102,7 +101,7 @@ export default function KambazNavigation() {
 
         <Nav.Item>
           <Nav.Link
-            as={NavLink}
+            as={Link}
             to="/Labs"
             id="wd-labs-link"
             className="list-group-item text-center border-0 bg-black text-white"
