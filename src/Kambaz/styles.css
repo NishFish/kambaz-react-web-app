@@ -22,7 +22,6 @@ body * {
 .list-group-item:active {
     background-color: white !important;
     color: #dc3545 !important;
-
 }
 
 .list-group-item {
