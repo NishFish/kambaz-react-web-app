@@ -1,0 +1,34 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body * {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+@media (min-width: 768px) {
+    #wd-kambaz .wd-main-content-offset {
+        padding-left: 140px !important;
+    }
+}
+
+#wd-neu-link {
+    background-color: transparent;
+    padding-top: 25px;
+}
+
+.list-group-item:focus,
+.list-group-item:active {
+    background-color: white !important;
+    color: #dc3545 !important;
+
+}
+
+.list-group-item {
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+#wd-account-link:focus .fs-1 {
+    color: grey !important;
+}
