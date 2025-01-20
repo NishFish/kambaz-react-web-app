@@ -44,7 +44,7 @@ export default function KambazNavigation() {
             as={Link}
             to="/Kambaz/Dashboard"
             id="wd-dashboard-link"
-            className="list-group-item text-center border-0 bg-black text-white"
+            className="list-group-item text-center border-0 bg-white text-danger"
           >
             <AiOutlineDashboard className="fs-1 text-danger" />
             <br />
