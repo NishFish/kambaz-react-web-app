@@ -84,3 +84,21 @@ body * {
     background-color: white;
     border-left: 3px solid black !important;
 }
+
+button.custom-dark-grey-btn.btn-lg {
+    background-color: rgb(226, 226, 226) !important;
+    color: rgb(0, 0, 0) !important;
+}
+
+button.custom-dark-grey-btn.btn-lg:hover {
+    background-color: #8b8b8b !important;
+    color: white !important;
+}
+
+#wd-publish-all-btn,
+#wd-publish-all-btn:focus,
+#wd-publish-all-btn:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none;
+}
