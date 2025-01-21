@@ -121,3 +121,9 @@ button.custom-dark-grey-btn.btn-lg:hover {
 .wd-lesson {
     border-left: 3px solid green !important;
 }
+
+.modules-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 15px;
+}

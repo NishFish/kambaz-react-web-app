@@ -7,9 +7,10 @@ export default function Home() {
       <div className="flex-fill">
         <Modules />
       </div>
-      <div className="d-none d-md-block">
+      <div className="d-none d-md-block me-3" style={{ minWidth: "400px" }}>
         <CourseStatus />
       </div>
     </div>
+
   );
 }
