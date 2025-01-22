@@ -127,3 +127,13 @@ button.custom-dark-grey-btn.btn-lg:hover {
     margin: 0 auto;
     padding: 0 15px;
 }
+
+.wd-assignment-list-item {
+    border-left: 3px solid green !important;
+}
+
+.assignments-container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 15px;
+}

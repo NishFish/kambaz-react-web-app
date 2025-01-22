@@ -6,16 +6,16 @@ export default function PeopleTable() {
         <div
             id="wd-people-table"
             style={{
-                fontSize: "1.0rem", // Smaller text size
-                marginLeft: "0.5rem", // Reduce left margin
-                marginRight: "0.5rem", // Reduce right margin
+                fontSize: "1.0rem",
+                marginLeft: "0.5rem",
+                marginRight: "0.5rem",
             }}
         >
             <Table
                 striped
                 className="table-sm"
                 style={{
-                    margin: "0", // Eliminate default table margins
+                    margin: "0",
                 }}
             >
                 <thead>
