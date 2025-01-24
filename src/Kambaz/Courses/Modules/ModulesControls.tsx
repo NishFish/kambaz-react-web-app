@@ -56,10 +56,6 @@ export default function ModulesControls() {
             <button
                 id="wd-add-module-btn"
                 className="btn btn-lg btn-danger me-2"
-                style={{
-                    height: "48px",
-                    marginTop: "1px"
-                }}
             >
                 <FaPlus className="position-relative me-2" style={{ bottom: "3px" }} />
                 Module

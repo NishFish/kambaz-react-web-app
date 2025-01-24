@@ -119,7 +119,7 @@ button.custom-dark-grey-btn.btn-lg:hover {
 }
 
 .wd-lesson {
-    border-left: 3px solid green !important;
+    border-left: 6px solid green !important;
 }
 
 .modules-container {
@@ -129,11 +129,41 @@ button.custom-dark-grey-btn.btn-lg:hover {
 }
 
 .wd-assignment-list-item {
-    border-left: 3px solid green !important;
+    border-left: 6px solid green !important;
 }
 
 .assignments-container {
     max-width: 1500px;
     margin: 0 auto;
     padding: 0 15px;
+}
+
+#wd-assignments {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    width: 500px;
+    height: 48px;
+    background-color: #fff;
+}
+
+.search-icon {
+    color: #6c757d;
+    margin-right: 8px;
+    font-size: 30px;
+}
+
+#wd-search-assignment {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 25px;
+    color: #6c757d;
 }
