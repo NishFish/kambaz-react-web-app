@@ -167,3 +167,9 @@ button.custom-dark-grey-btn.btn-lg:hover {
     font-size: 25px;
     color: #6c757d;
 }
+
+#wd-assignments-editor {
+    max-width: 800px;
+    margin: 0 auto;
+    
+}
