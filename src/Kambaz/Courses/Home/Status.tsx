@@ -1,4 +1,4 @@
-import { FaBell, FaChartBar, FaChartLine, FaCheckCircle, FaHome, FaKey } from "react-icons/fa";
+import { FaBell, FaChartLine, FaCheckCircle, FaHome, FaKey } from "react-icons/fa";
 import { BiImport } from "react-icons/bi";
 import { LiaFileImportSolid } from "react-icons/lia";
 import { Button } from "react-bootstrap";

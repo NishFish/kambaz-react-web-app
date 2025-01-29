@@ -1,4 +1,3 @@
-import React from 'react';
 import { Form, Button, Table, Card } from 'react-bootstrap';
 import "../../styles.css"
 
