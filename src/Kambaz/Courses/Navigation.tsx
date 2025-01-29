@@ -60,7 +60,7 @@ export default function CourseNavigation() {
       </ListGroup.Item>
       <ListGroup.Item className="p-0 border-0">
         <Link
-          to="/Kambaz/Courses/1234/People"
+          to="/Kambaz/Courses/:cid/People"
           id="wd-course-people-link"
           className="btn btn-link w-100 text-start text-danger list-group-item border-0"
         >

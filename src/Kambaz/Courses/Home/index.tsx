@@ -7,7 +7,7 @@ export default function Home() {
       <div className="flex-fill">
         <Modules />
       </div>
-      <div className="d-none d-md-block me-3" style={{ minWidth: "400px", marginLeft: "40px" }}>
+      <div className="d-none d-lg-block me-3" style={{ minWidth: "400px", marginLeft: "40px" }}>
         <CourseStatus />
       </div>
     </div>
