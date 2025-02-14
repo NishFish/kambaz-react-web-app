@@ -6,9 +6,13 @@ import { MdOutlineEditNote } from "react-icons/md";
 import AssignmentControlButtons from "./AssignmentControlButtons";
 import { CiSearch } from "react-icons/ci";
 import { FaPlus } from "react-icons/fa6";
+import * as db from "../../Database";
+import { useParams } from "react-router";
 
 
 export default function Assignments() {
+    const { cid } = useParams();
+    const assignments = db.assignments;
     return (
         <div id="wd-assignments" className="assignments-container">
             <div className="d-flex justify-content-between align-items-center">
@@ -75,75 +79,32 @@ export default function Assignments() {
                     </div>
                 </div>
 
-
-                <li className="wd-assignment-list-item list-group-item py-3 px-3">
-                    <div className="d-flex align-items-center justify-content-between">
-                        <div className="d-flex align-items-center">
-                            <BsGripVertical className="fs-1 me-2 text-secondary" />
-                            <MdOutlineEditNote style={{ color: "green", fontSize: "24px" }} className="fs-1 me-3" />
-                        </div>
-                        <div className="flex-grow-1">
-                            <a href="#/Kambaz/Courses/1234/Assignments/123" className="wd-assignment-link fw-bold text-dark text-decoration-none" style={{ fontSize: "20px" }}>
-                                A1 - ENV + HTML
-                            </a>
-                            <p className="mb-1 text-muted">
-                                <span style={{ color: "#dc3545" }}>Multiple Modules</span> | <b>Not available until</b> January 2 at 12:00AM |
-                            </p>
-                            <p className="mb-1 text-muted">
-                                <b>Due</b> January 21 at 11:59PM | 100 points
-                            </p>
-                        </div>
-                        <div className="d-flex align-items-center">
-                            <AssignmentControlButtons />
-                        </div>
-                    </div>
-                </li>
-
-                <li className="wd-assignment-list-item list-group-item py-3 px-3">
-                    <div className="d-flex align-items-center justify-content-between">
-                        <div className="d-flex align-items-center">
-                            <BsGripVertical className="fs-1 me-2 text-secondary" />
-                            <MdOutlineEditNote style={{ color: "green", fontSize: "24px" }} className="fs-1 me-3" />
-                        </div>
-                        <div className="flex-grow-1">
-                            <a href="#/Kambaz/Courses/1234/Assignments/123" className="wd-assignment-link fw-bold text-dark text-decoration-none" style={{ fontSize: "20px" }}>
-                                A2 - Bootstrap
-                            </a>
-                            <p className="mb-1 text-muted">
-                                <span style={{ color: "#dc3545" }}>Multiple Modules</span> | <b>Not available until</b> February 13 at 12:00AM |
-                            </p>
-                            <p className="mb-1 text-muted">
-                                <b>Due</b> March 2 at 11:59PM | 100 points
-                            </p>
-                        </div>
-                        <div className="d-flex align-items-center">
-                            <AssignmentControlButtons />
-                        </div>
-                    </div>
-                </li>
-
-                <li className="wd-assignment-list-item list-group-item py-3 px-3">
-                    <div className="d-flex align-items-center justify-content-between">
-                        <div className="d-flex align-items-center">
-                            <BsGripVertical className="fs-1 me-2 text-secondary" />
-                            <MdOutlineEditNote style={{ color: "green", fontSize: "24px" }} className="fs-1 me-3" />
-                        </div>
-                        <div className="flex-grow-1">
-                            <a href="#/Kambaz/Courses/1234/Assignments/123" className="wd-assignment-link fw-bold text-dark text-decoration-none" style={{ fontSize: "20px" }}>
-                                A3 - JS + Express
-                            </a>
-                            <p className="mb-1 text-muted">
-                                <span style={{ color: "#dc3545" }}>Multiple Modules</span> | <b>Not available until</b> March 22 at 12:00AM |
-                            </p>
-                            <p className="mb-1 text-muted">
-                                <b>Due</b> March 31 at 11:59PM | 100 points
-                            </p>
-                        </div>
-                        <div className="d-flex align-items-center">
-                            <AssignmentControlButtons />
-                        </div>
-                    </div>
-                </li>
+                {assignments
+                    .filter((assignments) => assignments.course === cid)
+                    .map((assignments) => (
+                        <li key={assignments._id} className="wd-assignment-list-item list-group-item py-3 px-3">
+                            <div className="d-flex align-items-center justify-content-between">
+                                <div className="d-flex align-items-center">
+                                    <BsGripVertical className="fs-1 me-2 text-secondary" />
+                                    <MdOutlineEditNote style={{ color: "green", fontSize: "24px" }} className="fs-1 me-3" />
+                                </div>
+                                <div className="flex-grow-1">
+                                    <a href={`#/Kambaz/Courses/${cid}/Assignments/${assignments._id}`} className="wd-assignment-link fw-bold text-dark text-decoration-none" style={{ fontSize: "20px" }}>
+                                        {assignments.title}
+                                    </a>
+                                    <p className="mb-1 text-muted">
+                                        <span style={{ color: "#dc3545" }}>{assignments.modules}</span> | <b>Not available until</b> {assignments.release} |
+                                    </p>
+                                    <p className="mb-1 text-muted">
+                                        <b>Due</b> {assignments.due} | {assignments.points} points
+                                    </p>
+                                </div>
+                                <div className="d-flex align-items-center">
+                                    <AssignmentControlButtons />
+                                </div>
+                            </div>
+                        </li>
+                    ))}
             </ul>
         </div>
     );
