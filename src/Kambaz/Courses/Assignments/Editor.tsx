@@ -3,6 +3,8 @@ import "../../styles.css"
 import * as db from "../../Database";
 import { useParams } from 'react-router';
 import { useNavigate } from 'react-router';
+import { Link } from "react-router-dom";
+
 
 
 export default function AssignmentEditor() {
@@ -152,11 +154,16 @@ export default function AssignmentEditor() {
                                 </tr>
                             </tbody>
                         </Table>
-
-                        <div className="text-end mt-4"><hr />
-                            <Button onClick={() => navigate(`/Kambaz/Courses/${cid}/Assignments`)} variant="secondary" className="me-2" style={{ backgroundColor: "#e4e4e4" }} >Cancel</Button>
-                            <Button onClick={() => navigate(`/Kambaz/Courses/${cid}/Assignments`)} variant="primary" className="btn-danger">Save</Button>
+                        <div className="text-end mt-4">
+                            <hr />
+                            <Link to={`/Kambaz/Courses/${cid}/Assignments`} className="btn btn-secondary me-2" style={{ backgroundColor: "#e4e4e4", textDecoration: "none" }}>
+                                Cancel
+                            </Link>
+                            <Link to={`/Kambaz/Courses/${cid}/Assignments`} className="btn btn-danger">
+                                Save
+                            </Link>
                         </div>
+
                     </Form>
                 ))
             }
