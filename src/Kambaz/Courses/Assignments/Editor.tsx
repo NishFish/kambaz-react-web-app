@@ -2,14 +2,12 @@ import { Form, Table, Card } from 'react-bootstrap';
 import "../../styles.css"
 import * as db from "../../Database";
 import { useParams } from 'react-router';
-import { useNavigate } from 'react-router';
 import { Link } from "react-router-dom";
 
 
 
 export default function AssignmentEditor() {
     const { cid, aid } = useParams();
-    const navigate = useNavigate()
     const assignments = db.assignments;
 
     function formatDateTime(dateStr: string): string {
