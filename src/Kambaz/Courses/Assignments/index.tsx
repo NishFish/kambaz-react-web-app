@@ -8,11 +8,14 @@ import { CiSearch } from "react-icons/ci";
 import { FaPlus } from "react-icons/fa6";
 import * as db from "../../Database";
 import { useParams } from "react-router";
+import { useSelector } from "react-redux";
 
 
 export default function Assignments() {
     const { cid } = useParams();
     const assignments = db.assignments;
+    const { currentUser } = useSelector((state: any) => state.accountReducer);
+
     return (
         <div id="wd-assignments" className="assignments-container">
             <div className="d-flex justify-content-between align-items-center">
@@ -25,26 +28,26 @@ export default function Assignments() {
                         placeholder="Search..."
                     />
                 </div>
-
-                <div>
-                    <button
-                        id="wd-add-module-btn"
-                        className="btn btn-lg border me-2"
-                        style={{ backgroundColor: "#e4e4e4", height: "48px" }}
-                    >
-                        <FaPlus className="position-relative me-2" style={{ bottom: "3px" }} />
-                        Group
-                    </button>
-                    <button
-                        id="wd-add-assignment-btn"
-                        className="btn btn-lg btn-danger"
-                        style={{ height: "48px" }}
-                    >
-                        <FaPlus className="position-relative me-2" style={{ bottom: "3px" }} />
-                        Assignment
-                    </button>
-                </div>
-
+                {currentUser.role === "FACULTY" && (
+                    <div>
+                        <button
+                            id="wd-add-module-btn"
+                            className="btn btn-lg border me-2"
+                            style={{ backgroundColor: "#e4e4e4", height: "48px" }}
+                        >
+                            <FaPlus className="position-relative me-2" style={{ bottom: "3px" }} />
+                            Group
+                        </button>
+                        <button
+                            id="wd-add-assignment-btn"
+                            className="btn btn-lg btn-danger"
+                            style={{ height: "48px" }}
+                        >
+                            <FaPlus className="position-relative me-2" style={{ bottom: "3px" }} />
+                            Assignment
+                        </button>
+                    </div>
+                )}
             </div>
             <br />
 
@@ -53,45 +56,67 @@ export default function Assignments() {
                 <div className="wd-title p-3 ps-2 d-flex justify-content-between align-items-center" style={{
                     backgroundColor: "#e4e4e4"
                 }}>
-                    <div className="d-flex align-items-center">
-                        <BsGripVertical className="me-2 fs-3" />
-                    </div>
-
+                    {currentUser.role === "FACULTY" && (
+                        <div className="d-flex align-items-center">
+                            <BsGripVertical className="me-2 fs-3" />
+                        </div>
+                    )}
                     <div className="flex-grow-1 text-left">
                         <h4 className="mb-0"><GoTriangleDown /><b> ASSIGNMENTS</b></h4>
                     </div>
-
-                    <div
-                        className="px-3 py-1"
-                        style={{
-                            border: "1px solid",
-                            borderRadius: "20px",
-                            fontSize: "20px",
-                            display: "inline-block",
-                            whiteSpace: "nowrap",
-                        }}
-                    >
-                        40% of Total
-                    </div>
-
-                    <div className="d-flex align-items-center">
-                        <ModuleControlButtons />
-                    </div>
+                    {currentUser.role === "FACULTY" && (
+                        <>
+                            <div
+                                className="px-3 py-1"
+                                style={{
+                                    border: "1px solid",
+                                    borderRadius: "20px",
+                                    fontSize: "20px",
+                                    display: "inline-block",
+                                    whiteSpace: "nowrap",
+                                }}
+                            >
+                                40% of Total
+                            </div>
+                            <div className="d-flex align-items-center">
+                                <ModuleControlButtons />
+                            </div>
+                        </>
+                    )}
                 </div>
 
                 {assignments
                     .filter((assignments) => assignments.course === cid)
                     .map((assignments) => (
-                        <li key={assignments._id} className="wd-assignment-list-item list-group-item py-3 px-3">
+                        <li
+                            key={assignments._id}
+                            className={`list-group-item py-3 px-3 ${currentUser.role === "FACULTY" ? "wd-assignment-list-item" : ""
+                                }`}
+                        >
                             <div className="d-flex align-items-center justify-content-between">
-                                <div className="d-flex align-items-center">
-                                    <BsGripVertical className="fs-1 me-2 text-secondary" />
-                                    <MdOutlineEditNote style={{ color: "green", fontSize: "24px" }} className="fs-1 me-3" />
-                                </div>
+                                {currentUser.role === "FACULTY" && (
+                                    <div className="d-flex align-items-center">
+                                        <BsGripVertical className="fs-1 me-2 text-secondary" />
+                                        <MdOutlineEditNote style={{ color: "green", fontSize: "24px" }} className="fs-1 me-3" />
+                                    </div>
+                                )}
                                 <div className="flex-grow-1">
-                                    <a href={`#/Kambaz/Courses/${cid}/Assignments/${assignments._id}`} className="wd-assignment-link fw-bold text-dark text-decoration-none" style={{ fontSize: "20px" }}>
-                                        {assignments.title}
-                                    </a>
+                                    {currentUser.role === "FACULTY" ? (
+                                        <a
+                                            href={`#/Kambaz/Courses/${cid}/Assignments/${assignments._id}`}
+                                            className="wd-assignment-link fw-bold text-dark text-decoration-none"
+                                            style={{ fontSize: "20px" }}
+                                        >
+                                            {assignments.title}
+                                        </a>
+                                    ) : (
+                                        <span
+                                            className="fw-bold text-dark"
+                                            style={{ fontSize: "20px" }}
+                                        >
+                                            {assignments.title}
+                                        </span>
+                                    )}
                                     <p className="mb-1 text-muted">
                                         <span style={{ color: "#dc3545" }}>{assignments.modules}</span> | <b>Not available until</b> {assignments.release} |
                                     </p>
@@ -99,9 +124,11 @@ export default function Assignments() {
                                         <b>Due</b> {assignments.due} | {assignments.points} points
                                     </p>
                                 </div>
-                                <div className="d-flex align-items-center">
-                                    <AssignmentControlButtons />
-                                </div>
+                                {currentUser.role === "FACULTY" && (
+                                    <div className="d-flex align-items-center">
+                                        <AssignmentControlButtons />
+                                    </div>
+                                )}
                             </div>
                         </li>
                     ))}

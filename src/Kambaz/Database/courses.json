@@ -1,6 +1,7 @@
 [
     {
         "_id": "BIO101",
+        "image": "/images/BIO101.jpg",
         "name": "Biology",
         "term": "Spring 2025",
         "section": "Section 1",
@@ -13,6 +14,7 @@
     },
     {
         "_id": "MTH101",
+        "image": "/images/MTH101.jpg",
         "name": "Math",
         "term": "Spring 2025",
         "section": "Section 1",
@@ -25,6 +27,7 @@
     },
     {
         "_id": "CHE101",
+        "image": "/images/CHE101.jpg",
         "name": "Chemistry",
         "term": "Spring 2025",
         "section": "Section 1",
@@ -37,6 +40,7 @@
     },
     {
         "_id": "PHY101",
+        "image": "/images/PHY101.jpg",
         "name": "Physics",
         "term": "Spring 2025",
         "section": "Section 1",
@@ -49,6 +53,7 @@
     },
     {
         "_id": "SPA101",
+        "image": "/images/SPA101.jpg",
         "name": "Spanish",
         "term": "Spring 2025",
         "section": "Section 1",
@@ -61,6 +66,7 @@
     },
     {
         "_id": "PSY101",
+        "image": "/images/PSY101.jpg",
         "name": "Psychology",
         "term": "Spring 2025",
         "section": "Section 1",
@@ -73,6 +79,7 @@
     },
     {
         "_id": "MAN101",
+        "image": "/images/MAN101.jpg",
         "name": "Mandarin",
         "term": "Spring 2025",
         "section": "Section 1",
@@ -85,6 +92,7 @@
     },
     {
         "_id": "PE101",
+        "image": "/images/PE101.jpg",
         "name": "Physical Education",
         "term": "Spring 2025",
         "section": "Section 1",
