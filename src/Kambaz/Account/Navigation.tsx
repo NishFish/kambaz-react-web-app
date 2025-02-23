@@ -1,6 +1,11 @@
 import { ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+
 export default function AccountNavigation() {
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const links = currentUser ? ["Profile"] : ["Signin", "Signup"];
   return (
     <ListGroup id="wd-courses-navigation" className="wd list-group fs-5 rounded-0">
       <ListGroup.Item className="p-0 border-0 active">
