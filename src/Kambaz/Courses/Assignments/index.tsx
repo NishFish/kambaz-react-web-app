@@ -9,13 +9,18 @@ import { FaPlus } from "react-icons/fa6";
 import * as db from "../../Database";
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
-
+import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router-dom";
 
 export default function Assignments() {
     const { cid } = useParams();
     const assignments = db.assignments;
     const { currentUser } = useSelector((state: any) => state.accountReducer);
-
+    const navigate = useNavigate();
+    const handleClick = () => {
+        const newAssignmentId = uuidv4();
+        navigate(`/Kambaz/Courses/${cid}/Assignments/${newAssignmentId}`);
+    };
     return (
         <div id="wd-assignments" className="assignments-container">
             <div className="d-flex justify-content-between align-items-center">
@@ -42,6 +47,7 @@ export default function Assignments() {
                             id="wd-add-assignment-btn"
                             className="btn btn-lg btn-danger"
                             style={{ height: "48px" }}
+                            onClick={handleClick}
                         >
                             <FaPlus className="position-relative me-2" style={{ bottom: "3px" }} />
                             Assignment
