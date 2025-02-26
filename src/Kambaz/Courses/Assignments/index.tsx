@@ -134,7 +134,7 @@ export default function Assignments() {
                                 </div>
                                 {currentUser.role === "FACULTY" && (
                                     <div className="d-flex align-items-center">
-                                        <AssignmentControlButtons />
+                                        <AssignmentControlButtons assignmentId={assignments._id} />
                                     </div>
                                 )}
                             </div>
