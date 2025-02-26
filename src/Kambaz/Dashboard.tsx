@@ -12,6 +12,7 @@ export default function Dashboard({ courses, course, setCourse, addNewCourse,
   }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const { enrollments } = db;
+
   return (
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
@@ -45,9 +46,10 @@ export default function Dashboard({ courses, course, setCourse, addNewCourse,
             enrollments.some(
               (enrollment) =>
                 enrollment.user === currentUser._id &&
-                enrollment.course === course._id
+                ((enrollment.course === course._id))
             ))
             .map((course) => (
+
               <Col className="wd-dashboard-course" style={{ width: "300px" }}>
                 <Card className="shadow rounded-3 overflow-hidden mt-4">
                   <Link to={`/Kambaz/Courses/${course._id}/Home`}
@@ -92,8 +94,6 @@ export default function Dashboard({ courses, course, setCourse, addNewCourse,
                           </div>
                         )}
                       </div>
-
-
                     </Card.Body>
                   </Link>
                 </Card>

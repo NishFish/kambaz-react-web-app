@@ -5,6 +5,11 @@
         "course": "BIO101"
     },
     {
+        "_id": "1",
+        "user": "123",
+        "course": "TEST101"
+    },
+    {
         "_id": "2",
         "user": "234",
         "course": "BIO101"

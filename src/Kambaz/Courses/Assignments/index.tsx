@@ -6,21 +6,22 @@ import { MdOutlineEditNote } from "react-icons/md";
 import AssignmentControlButtons from "./AssignmentControlButtons";
 import { CiSearch } from "react-icons/ci";
 import { FaPlus } from "react-icons/fa6";
-import * as db from "../../Database";
 import { useParams } from "react-router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
+import { editAssignment } from "./reducer";
 
 export default function Assignments() {
     const { cid } = useParams();
-    const assignments = db.assignments;
+    const { assignments } = useSelector((state: any) => state.assignmentsReducer);
     const { currentUser } = useSelector((state: any) => state.accountReducer);
     const navigate = useNavigate();
     const handleClick = () => {
         const newAssignmentId = uuidv4();
         navigate(`/Kambaz/Courses/${cid}/Assignments/${newAssignmentId}`);
     };
+    const dispatch = useDispatch();
     return (
         <div id="wd-assignments" className="assignments-container">
             <div className="d-flex justify-content-between align-items-center">
@@ -92,8 +93,8 @@ export default function Assignments() {
                 </div>
 
                 {assignments
-                    .filter((assignments) => assignments.course === cid)
-                    .map((assignments) => (
+                    .filter((assignments: any) => assignments.course === cid)
+                    .map((assignments: any) => (
                         <li
                             key={assignments._id}
                             className={`list-group-item py-3 px-3 ${currentUser.role === "FACULTY" ? "wd-assignment-list-item" : ""
@@ -112,6 +113,7 @@ export default function Assignments() {
                                             href={`#/Kambaz/Courses/${cid}/Assignments/${assignments._id}`}
                                             className="wd-assignment-link fw-bold text-dark text-decoration-none"
                                             style={{ fontSize: "20px" }}
+                                            onClick={() => dispatch(editAssignment(assignments._id))}
                                         >
                                             {assignments.title}
                                         </a>
