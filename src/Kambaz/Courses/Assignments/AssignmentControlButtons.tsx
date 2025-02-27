@@ -39,7 +39,7 @@ export default function AssignmentControlButtons({ assignmentId }: { assignmentI
                                     Cancel
                                 </button>
                                 <button type="button" className="btn btn-danger" onClick={confirmDelete}>
-                                    Delete
+                                    Yes
                                 </button>
                             </div>
                         </div>

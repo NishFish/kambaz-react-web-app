@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import "./styles.css"
 import { useSelector } from "react-redux";
 import * as db from "./Database";
+import { useState } from 'react';
 
 export default function Dashboard({ courses, course, setCourse, addNewCourse,
   deleteCourse, updateCourse }: {
@@ -12,11 +13,31 @@ export default function Dashboard({ courses, course, setCourse, addNewCourse,
   }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const { enrollments } = db;
+  const [showAllCourses, setShowAllCourses] = useState(false);
+
+  const enrolledCourses = courses.filter(course =>
+    enrollments.some(enrollment =>
+      enrollment.user === currentUser._id && enrollment.course === course._id
+    )
+  );
+
 
   return (
     <div id="wd-dashboard">
-      <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
+      <div className="d-flex align-items-center justify-content-between">
+        <h1 id="wd-dashboard-title">Dashboard</h1>
+        {currentUser.role === "STUDENT" && (
+          <Button
+            variant="primary"
+            className="btn-lg"
+            onClick={() => setShowAllCourses(!showAllCourses)}
+          >
+            {showAllCourses ? "My Enrollments" : "All Courses"}
+          </Button>
+        )}
+      </div>
 
+      <hr />
       {currentUser.role === "FACULTY" && (
         <div>
           <h5>New Course
@@ -39,66 +60,59 @@ export default function Dashboard({ courses, course, setCourse, addNewCourse,
           <textarea value={course.description} className="form-control" onChange={(e) => setCourse({ ...course, description: e.target.value })} /><br />
         </div>
       )}
-      <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2> <hr />
+      <h2 id="wd-dashboard-published">Published Courses ({(showAllCourses || currentUser.role === "FACULTY") ? courses.length : enrolledCourses.length})</h2> <hr />
       <div id="wd-dashboard-courses">
         <Row xs={1} md={5} className="g-4">
-          {courses.filter((course) =>
-            enrollments.some(
-              (enrollment) =>
-                enrollment.user === currentUser._id &&
-                ((enrollment.course === course._id))
-            ))
-            .map((course) => (
+          {(showAllCourses || currentUser.role === "FACULTY" ? courses : enrolledCourses).map((course) => (
+            <Col className="wd-dashboard-course" style={{ width: "300px" }}>
+              <Card className="shadow rounded-3 overflow-hidden mt-4">
+                <Link to={`/Kambaz/Courses/${course._id}/Home`}
+                  className="wd-dashboard-course-link text-decoration-none text-dark" >
+                  <Card.Img src={course.image} variant="top" width={100} height={160} />
+                  <Card.Body className="card-body">
+                    <Card.Title className="wd-dashboard-course-title text-nowrap overflow-hidden">
+                      {course.name} </Card.Title>
+                    <Card.Text className="wd-dashboard-course-description overflow-hidden" style={{ height: "50px" }}>
+                      {course.description} </Card.Text>
+                    <p
+                      className="card-subtext text-muted"
+                      style={{ fontSize: '0.85rem', marginTop: '-15px' }}
+                    >
+                      {`${course.term} ${course.section}`}
+                    </p>
+                    <div className="d-flex justify-content-between align-items-center w-100">
+                      <Button variant="primary" className="m-0"> Open </Button>
 
-              <Col className="wd-dashboard-course" style={{ width: "300px" }}>
-                <Card className="shadow rounded-3 overflow-hidden mt-4">
-                  <Link to={`/Kambaz/Courses/${course._id}/Home`}
-                    className="wd-dashboard-course-link text-decoration-none text-dark" >
-                    <Card.Img src={course.image} variant="top" width={100} height={160} />
-                    <Card.Body className="card-body">
-                      <Card.Title className="wd-dashboard-course-title text-nowrap overflow-hidden">
-                        {course.name} </Card.Title>
-                      <Card.Text className="wd-dashboard-course-description overflow-hidden" style={{ height: "50px" }}>
-                        {course.description} </Card.Text>
-                      <p
-                        className="card-subtext text-muted"
-                        style={{ fontSize: '0.85rem', marginTop: '-15px' }}
-                      >
-                        {`${course.term} ${course.section}`}
-                      </p>
-                      <div className="d-flex justify-content-between align-items-center w-100">
-                        <Button variant="primary" className="m-0"> Open </Button>
-
-                        {currentUser.role === "FACULTY" && (
-                          <div className="d-flex">
-                            <button
-                              id="wd-edit-course-click"
-                              onClick={(event) => {
-                                event.preventDefault();
-                                setCourse(course);
-                              }}
-                              className="btn btn-warning me-1"
-                            >
-                              Edit
-                            </button>
-                            <button
-                              onClick={(event) => {
-                                event.preventDefault();
-                                deleteCourse(course._id);
-                              }}
-                              className="btn btn-danger me-1"
-                              id="wd-delete-course-click"
-                            >
-                              Delete
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    </Card.Body>
-                  </Link>
-                </Card>
-              </Col>
-            ))}
+                      {currentUser.role === "FACULTY" && (
+                        <div className="d-flex">
+                          <button
+                            id="wd-edit-course-click"
+                            onClick={(event) => {
+                              event.preventDefault();
+                              setCourse(course);
+                            }}
+                            className="btn btn-warning me-1"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            onClick={(event) => {
+                              event.preventDefault();
+                              deleteCourse(course._id);
+                            }}
+                            className="btn btn-danger me-1"
+                            id="wd-delete-course-click"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </Card.Body>
+                </Link>
+              </Card>
+            </Col>
+          ))}
         </Row>
       </div>
     </div>
