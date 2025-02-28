@@ -47,7 +47,7 @@ export function convertToHumanReadable(dateStr: string): string {
     const match = dateStr.match(regex);
     if (!match) return "";
 
-    let [, year, month, day, hour, minute] = match;
+    let [month, day, hour, minute] = match;
     const monthName = monthNumbers[month];
     let hourNum = parseInt(hour, 10);
     const period = hourNum >= 12 ? "PM" : "AM";
