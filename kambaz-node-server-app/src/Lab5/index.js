@@ -1,4 +1,5 @@
 import PathParameters from "./PathParameters.js";
+import WorkingWithArrays from "./WorkingWithArrays.js";
 import WorkingWithObjects from "./WorkingWithObjects.js";
 
 export default function Lab5(app) {
@@ -7,4 +8,5 @@ export default function Lab5(app) {
     });
     PathParameters(app);
     WorkingWithObjects(app)
+    WorkingWithArrays(app)
 };
