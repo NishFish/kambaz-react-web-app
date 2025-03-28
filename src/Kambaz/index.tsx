@@ -4,17 +4,30 @@ import Dashboard from "./Dashboard";
 import KambazNavigation from "./Navigation";
 import Courses from "./Courses";
 import "./styles.css";
-import * as db from "./Database";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import ProtectedRoute from "./Account/ProtectedRoute";
 import { useSelector } from "react-redux";
 import Session from "./Account/Session";
+import * as userClient from "./Account/client";
+import * as db from "./Database";
 
 
 export default function Kambaz() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const [courses, setCourses] = useState<any[]>(db.courses);
+  const [courses, setCourses] = useState<any[]>([]);
+  const fetchCourses = async () => {
+    try {
+      const courses = await userClient.findMyCourses();
+      setCourses(courses);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    fetchCourses();
+  }, [currentUser]);
+
   const [enrollments, setEnrollments] = useState<any[]>(db.enrollments);
   const [course, setCourse] = useState<any>({
     _id: "1234", name: "New Course", number: "New Number", image: "/images/default.jpg",

@@ -5,6 +5,7 @@ import cors from "cors";
 import UserRoutes from "../../Kambaz/Users/routes.js";
 import session from "express-session";
 import "dotenv/config";
+import CourseRoutes from "../../Kambaz/Courses/routes.js";
 
 
 const app = express()
@@ -19,6 +20,7 @@ const sessionOptions = {
     resave: false,
     saveUninitialized: false,
 };
+app.use(session(sessionOptions));
 if (process.env.NODE_ENV !== "development") {
     sessionOptions.proxy = true;
     sessionOptions.cookie = {
@@ -27,11 +29,10 @@ if (process.env.NODE_ENV !== "development") {
         domain: process.env.NODE_SERVER_DOMAIN,
     };
 }
-app.use(session(sessionOptions));
 app.use(express.json());
 
 Lab5(app)
 Hello(app)
 UserRoutes(app);
-
+CourseRoutes(app);
 app.listen(process.env.PORT || 4000)
