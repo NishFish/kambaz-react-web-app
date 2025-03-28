@@ -1,8 +1,14 @@
 import axios from "axios";
 const REMOTE_SERVER = import.meta.env.VITE_REMOTE_SERVER;
 const COURSES_API = `${REMOTE_SERVER}/api/courses`;
+export const USERS_API = `${REMOTE_SERVER}/api/users`;
+
 export const fetchAllCourses = async () => {
     const { data } = await axios.get(COURSES_API);
+    return data;
+};
+export const fetchAllEnrollments = async () => {
+    const { data } = await axios.get(`${COURSES_API}/enrollments`);
     return data;
 };
 export const deleteCourse = async (id: string) => {
@@ -37,3 +43,23 @@ export const createAssignmentForCourse = async (courseId: string, assignment: an
     );
     return response.data;
 };
+export const enrollCourse = async (userId: string, courseId: string) => {
+    try {
+        const response = await axios.post(`${COURSES_API}/enroll/${userId}/${courseId}`);
+        return response.data;
+    } catch (error) {
+        console.error("Error enrolling user:", error);
+        throw error;
+    }
+};
+
+export const unenrollCourse = async (userId: string, courseId: string) => {
+    try {
+        const response = await axios.delete(`${COURSES_API}/unenroll/${userId}/${courseId}`);
+        return response.data;
+    } catch (error) {
+        console.error("Error unenrolling user:", error);
+        throw error;
+    }
+};
+

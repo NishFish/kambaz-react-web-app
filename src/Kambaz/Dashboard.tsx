@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import "./styles.css"
 import { useSelector } from "react-redux";
 import { useState } from 'react';
+import * as courseClient from "./Courses/client";
+import * as userClient from "./Account/client";
+
 
 export default function Dashboard({ enrollments, courses, course, setCourse, addNewCourse,
   deleteCourse, updateCourse, enrollCourse, unenrollCourse }: {
@@ -13,6 +16,11 @@ export default function Dashboard({ enrollments, courses, course, setCourse, add
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const [showAllCourses, setShowAllCourses] = useState(false);
 
+  const enrolledCourses = courses.filter(course =>
+    enrollments.some(enrollment =>
+      enrollment.user === currentUser._id && enrollment.course === course._id
+    )
+  );
 
 
 
@@ -54,10 +62,10 @@ export default function Dashboard({ enrollments, courses, course, setCourse, add
           <textarea value={course.description} className="form-control" onChange={(e) => setCourse({ ...course, description: e.target.value })} /><br />
         </div>
       )}
-      <h2 id="wd-dashboard-published">Published Courses ({(showAllCourses || currentUser.role === "FACULTY") ? courses.length : courses.length})</h2> <hr />
+      <h2 id="wd-dashboard-published">Published Courses ({(showAllCourses || currentUser.role === "FACULTY") ? courses.length : enrolledCourses.length})</h2> <hr />
       <div id="wd-dashboard-courses">
         <Row xs={1} md={5} className="g-4">
-          {(showAllCourses || currentUser.role === "FACULTY" ? courses : courses).map((course) => {
+          {(showAllCourses || currentUser.role === "FACULTY" ? courses : enrolledCourses).map((course) => {
             const isEnrolled = enrollments.some(enrollment => enrollment.user === currentUser._id && enrollment.course === course._id);
             return (
               <Col className="wd-dashboard-course" style={{ width: "300px" }}>
