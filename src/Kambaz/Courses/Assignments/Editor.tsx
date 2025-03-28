@@ -3,11 +3,9 @@ import "../../styles.css";
 import { useParams, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { addAssignment, deleteAssignment, updateAssignment } from "./reducer";
-import { v4 as uuidv4 } from "uuid";
+import { addAssignment, updateAssignment } from "./reducer";
 import { convertToISO, convertToHumanReadable } from "./convert_date"
 import * as coursesClient from "../client";
-import { modules } from "../../Database";
 import * as assignmentsClient from "./client";
 
 export default function AssignmentEditor() {

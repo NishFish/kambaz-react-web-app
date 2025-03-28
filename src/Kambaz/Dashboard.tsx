@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 import "./styles.css"
 import { useSelector } from "react-redux";
 import { useState } from 'react';
-import * as courseClient from "./Courses/client";
-import * as userClient from "./Account/client";
-
 
 export default function Dashboard({ enrollments, courses, course, setCourse, addNewCourse,
   deleteCourse, updateCourse, enrollCourse, unenrollCourse }: {

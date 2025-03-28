@@ -11,8 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 import * as coursesClient from "../client";
-import { useEffect, useState } from "react";
-import { addAssignment, deleteAssignment, updateAssignment, editAssignment, setAssignment } from "./reducer"
+import { useEffect } from "react";
+import { editAssignment, setAssignment } from "./reducer"
 
 
 export default function Assignments() {
