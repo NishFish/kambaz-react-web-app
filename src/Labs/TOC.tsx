@@ -23,6 +23,9 @@ export default function TOC() {
       <li className="nav-item"><a id="wd-k" href="#/Kambaz" className="nav-link">Kambaz</a></li>
       <li className="nav-item"><a id="wd-github" href="https://github.com/NishFish/kambaz-react-web-app" target="_blank"
         className="nav-link">My GitHub</a></li>
+
+      <li className="nav-item"><a id="wd-github" href="https://github.com/NishFish/kambaz-react-web-app-deploy/tree/a5" target="_blank"
+        className="nav-link">My GitHub server for deployment</a></li>
     </ul>
   );
 }
