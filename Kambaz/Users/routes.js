@@ -6,7 +6,11 @@ import * as enrollmentsDao from "../Enrollments/dao.js";
 let currentUser = null;
 
 export default function UserRoutes(app) {
-    const createUser = (req, res) => { };
+    const createUser = async (req, res) => {
+        const user = await dao.createUser(req.body);
+        res.json(user);
+    };
+    app.post("/api/users", createUser);
 
     const deleteUser = async (req, res) => {
         const status = await dao.deleteUser(req.params.userId);
@@ -110,7 +114,6 @@ export default function UserRoutes(app) {
 
 
 
-    app.post("/api/users", createUser);
     app.put("/api/users/:userId", updateUser);
     app.post("/api/users/signup", signup);
     app.post("/api/users/signin", signin);
