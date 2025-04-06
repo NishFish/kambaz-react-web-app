@@ -40,13 +40,36 @@ export default function Modules() {
     await modulesClient.updateModule(module);
     dispatch(updateModule(module));
   };
+  const fetchModulesForCourse = async () => {
+    const modules = await coursesClient.findModulesForCourse(cid!);
+    dispatch(setModules(modules));
+  };
+  useEffect(() => {
+    fetchModulesForCourse();
+  }, [cid]);
+  const addModuleHandler = async () => {
+    const newModule = await coursesClient.createModuleForCourse(cid!, {
+      name: moduleName,
+      course: cid,
+    });
+    dispatch(addModule(newModule));
+    setModuleName("");
+  };
+  const deleteModuleHandler = async (moduleId: string) => {
+    await modulesClient.deleteModule(moduleId);
+    dispatch(deleteModule(moduleId));
+  };
+  const updateModuleHandler = async (module: any) => {
+    await modulesClient.updateModule(module);
+    dispatch(updateModule(module));
+  };
 
   return (
     <div className="assignments-container">
       {currentUser.role === "FACULTY" && (
         <div>
           <ModulesControls setModuleName={setModuleName} moduleName={moduleName}
-            addModule={createModuleForCourse} />
+            addModule={addModuleHandler} />
           <br />
         </div>
       )}
@@ -64,16 +87,16 @@ export default function Modules() {
                   <>
                     {module.editing && (
                       <input className="form-control w-50 d-inline-block"
-                        onChange={(e) => dispatch(updateModule({ ...module, name: e.target.value }))}
+                        onChange={(e) => updateModuleHandler({ ...module, name: e.target.value })}
                         onKeyDown={(e) => {
                           if (e.key === "Enter") {
-                            saveModule({ ...module, editing: false });
+                            updateModuleHandler({ ...module, editing: false });
                           }
                         }}
                         defaultValue={module.name} />
                     )}
                     <ModuleControlButtons moduleId={module._id}
-                      deleteModule={(moduleId) => removeModule(moduleId)}
+                      deleteModule={(moduleId) => deleteModuleHandler(moduleId)}
                       editModule={(moduleId) => dispatch(editModule(moduleId))} />
                   </>
                 )}
