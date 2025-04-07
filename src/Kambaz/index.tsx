@@ -111,6 +111,7 @@ export default function Kambaz() {
     );
   };
 
+  /*
   const enrollCourse = async (courseId: string) => {
     try {
       const newEnrollment = await courseClient.enrollCourse(currentUser._id, courseId);
@@ -130,7 +131,7 @@ export default function Kambaz() {
       console.error("Error unenrolling from course:", error);
     }
   };
-
+*/
 
   return (
     <Session>
@@ -150,8 +151,6 @@ export default function Kambaz() {
                   addNewCourse={addNewCourse}
                   deleteCourse={deleteCourse}
                   updateCourse={updateCourse}
-                  enrollCourse={enrollCourse}
-                  unenrollCourse={unenrollCourse}
                   enrolling={enrolling}
                   setEnrolling={setEnrolling}
                   updateEnrollment={updateEnrollment}

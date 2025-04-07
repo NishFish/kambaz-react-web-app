@@ -5,20 +5,22 @@ import { useSelector } from "react-redux";
 import { useState } from 'react';
 
 export default function Dashboard({ enrollments, courses, course, setCourse, addNewCourse,
-  deleteCourse, updateCourse, enrollCourse, unenrollCourse, enrolling, setEnrolling, updateEnrollment }: {
+  deleteCourse, updateCourse, enrolling, setEnrolling, updateEnrollment }: {
     courses: any[]; enrollments: any[]; course: any; setCourse: (course: any) => void;
     addNewCourse: () => void; deleteCourse: (course: any) => void;
-    updateCourse: () => void; enrollCourse: (courseId: string) => void; unenrollCourse: (courseId: string) => void;
+    updateCourse: () => void;
     enrolling: boolean; setEnrolling: (enrolling: boolean) => void; updateEnrollment: (courseId: string, enrolled: boolean) => void;
   }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const [showAllCourses,] = useState(false);
 
+  /*
   const enrolledCourses = courses.filter(course => {
     return enrollments.some(enrollment =>
       course !== null && enrollment.user === currentUser._id && enrollment.course === course._id
     );
   });
+  */
 
 
 
