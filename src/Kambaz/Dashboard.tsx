@@ -27,9 +27,11 @@ export default function Dashboard({ enrollments, courses, course, setCourse, add
     <div id="wd-dashboard">
       <div className="d-flex align-items-center justify-content-between">
         <h1 id="wd-dashboard-title">Dashboard</h1>
-        <button onClick={() => setEnrolling(!enrolling)} className="float-end btn btn-primary" >
-          {enrolling ? "My Courses" : "All Courses"}
-        </button>
+        {currentUser.role === "STUDENT" && (
+          <button onClick={() => setEnrolling(!enrolling)} className="float-end btn btn-primary" >
+            {enrolling ? "My Courses" : "All Courses"}
+          </button>
+        )}
       </div>
 
       <hr />
@@ -79,8 +81,11 @@ export default function Dashboard({ enrollments, courses, course, setCourse, add
                       </p>
                       <div className="d-flex justify-content-between align-items-center w-100">
                         <Button variant="primary" className="m-0"> Open </Button>
-                        {enrolling && (
-                          <button className={`btn ${course.enrolled ? "btn-danger" : "btn-success"} float-end`} >
+                        {currentUser.role === "STUDENT" && enrolling && (
+                          <button onClick={(event) => {
+                            event.preventDefault();
+                            updateEnrollment(course._id, !course.enrolled);
+                          }} className={`btn ${course.enrolled ? "btn-danger" : "btn-success"} float-end`} >
                             {course.enrolled ? "Unenroll" : "Enroll"}
                           </button>
                         )}
