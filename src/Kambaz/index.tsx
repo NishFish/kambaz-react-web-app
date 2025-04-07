@@ -50,6 +50,25 @@ export default function Kambaz() {
     }
   }, [currentUser, enrolling]);
 
+
+
+  const updateEnrollment = async (courseId: string, enrolled: boolean) => {
+    if (enrolled) {
+      await userClient.enrollIntoCourse(currentUser._id, courseId);
+    } else {
+      await userClient.unenrollFromCourse(currentUser._id, courseId);
+    }
+    setCourses(
+      courses.map((course) => {
+        if (course._id === courseId) {
+          return { ...course, enrolled: enrolled };
+        } else {
+          return course;
+        }
+      })
+    );
+  };
+
   const [enrollments, setEnrollments] = useState<any[]>([]);
   const fetchEneollments = async () => {
     try {
@@ -66,10 +85,11 @@ export default function Kambaz() {
 
   const [course, setCourse] = useState<any>({
     _id: "1234", name: "New Course", number: "New Number", image: "/images/default.jpg",
-    startDate: "2023-09-10", endDate: "2023-12-15", description: "New Description",
+    startDate: "2023-09-10", endDate: "2025-01-10", description: "New Description",
+    term: "Spring 2025", section: "Section 1"
   });
   const addNewCourse = async () => {
-    const newCourse = await userClient.createCourse(course);
+    const newCourse = await courseClient.createCourse(course);
     setCourses([...courses, newCourse]);
   };
 
@@ -109,22 +129,6 @@ export default function Kambaz() {
     } catch (error) {
       console.error("Error unenrolling from course:", error);
     }
-  };
-  const updateEnrollment = async (courseId: string, enrolled: boolean) => {
-    if (enrolled) {
-      await userClient.enrollIntoCourse(currentUser._id, courseId);
-    } else {
-      await userClient.unenrollFromCourse(currentUser._id, courseId);
-    }
-    setCourses(
-      courses.map((course) => {
-        if (course._id === courseId) {
-          return { ...course, enrolled: enrolled };
-        } else {
-          return course;
-        }
-      })
-    );
   };
 
 

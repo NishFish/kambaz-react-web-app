@@ -9,7 +9,7 @@ export const fetchAllCourses = async () => {
     return data;
 };
 export const fetchAllEnrollments = async () => {
-    const { data } = await axios.get(`${COURSES_API}/enrollments`);
+    const { data } = await axiosWithCredentials.get(`${COURSES_API}/enrollments`);
     return data;
 };
 export const deleteCourse = async (id: string) => {
@@ -46,7 +46,7 @@ export const createAssignmentForCourse = async (courseId: string, assignment: an
 };
 export const enrollCourse = async (userId: string, courseId: string) => {
     try {
-        const response = await axios.post(`${COURSES_API}/enroll/${userId}/${courseId}`);
+        const response = await axiosWithCredentials.post(`${COURSES_API}/enroll/${userId}/${courseId}`);
         return response.data;
     } catch (error) {
         console.error("Error enrolling user:", error);
@@ -56,7 +56,7 @@ export const enrollCourse = async (userId: string, courseId: string) => {
 
 export const unenrollCourse = async (userId: string, courseId: string) => {
     try {
-        const response = await axios.delete(`${COURSES_API}/unenroll/${userId}/${courseId}`);
+        const response = await axiosWithCredentials.delete(`${COURSES_API}/unenroll/${userId}/${courseId}`);
         return response.data;
     } catch (error) {
         console.error("Error unenrolling user:", error);

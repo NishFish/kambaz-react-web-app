@@ -12,13 +12,14 @@ export default function Dashboard({ enrollments, courses, course, setCourse, add
     enrolling: boolean; setEnrolling: (enrolling: boolean) => void; updateEnrollment: (courseId: string, enrolled: boolean) => void;
   }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const [showAllCourses, setShowAllCourses] = useState(false);
+  const [showAllCourses,] = useState(false);
 
-  const enrolledCourses = courses.filter(course =>
-    enrollments.some(enrollment =>
-      enrollment.user === currentUser._id && enrollment.course === course._id
-    )
-  );
+  const enrolledCourses = courses.filter(course => {
+    return enrollments.some(enrollment =>
+      course !== null && enrollment.user === currentUser._id && enrollment.course === course._id
+    );
+  });
+
 
 
 
@@ -59,8 +60,8 @@ export default function Dashboard({ enrollments, courses, course, setCourse, add
       <h2 id="wd-dashboard-published">Published Courses ({(showAllCourses || currentUser.role === "FACULTY") ? courses.length : enrolledCourses.length})</h2> <hr />
       <div id="wd-dashboard-courses">
         <Row xs={1} md={5} className="g-4">
-          {(showAllCourses || currentUser.role === "FACULTY" ? courses : enrolledCourses).map((course) => {
-            const isEnrolled = enrollments.some(enrollment => enrollment.user === currentUser._id && enrollment.course === course._id);
+          {courses.map((course) => {
+            enrollments.some(enrollment => enrollment.user === currentUser._id && enrollment.course === course._id);
             return (
               <Col className="wd-dashboard-course" style={{ width: "300px" }}>
                 <Card className="shadow rounded-3 overflow-hidden mt-4">
