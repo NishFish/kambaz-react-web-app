@@ -26,6 +26,7 @@ export default function Modules() {
   useEffect(() => {
     fetchModules();
   }, []);
+  /*
   const createModuleForCourse = async () => {
     if (!cid) return;
     const newModule = { name: moduleName, course: cid };
@@ -40,6 +41,7 @@ export default function Modules() {
     await modulesClient.updateModule(module);
     dispatch(updateModule(module));
   };
+  */
   const fetchModulesForCourse = async () => {
     const modules = await coursesClient.findModulesForCourse(cid!);
     dispatch(setModules(modules));
