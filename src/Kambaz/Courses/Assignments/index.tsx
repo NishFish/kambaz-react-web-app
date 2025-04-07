@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import { editAssignment, setAssignment } from "./reducer"
 
 
+
 export default function Assignments() {
     const { cid } = useParams();
     const { assignments } = useSelector((state: any) => state.assignmentsReducer);
@@ -34,6 +35,7 @@ export default function Assignments() {
     useEffect(() => {
         fetchAssignments();
     }, []);
+
 
     return (
         <div id="wd-assignments" className="assignments-container">
