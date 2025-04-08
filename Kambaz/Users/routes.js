@@ -93,8 +93,6 @@ export default function UserRoutes(app) {
     };
     app.post("/api/users/profile", profile);
 
-    // Move enroll/unenroll above the general GET
-
     const enrollUserInCourse = async (req, res) => {
         let { uid, cid } = req.params;
         if (uid === "current") {
