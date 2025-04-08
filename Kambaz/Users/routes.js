@@ -103,6 +103,7 @@ export default function UserRoutes(app) {
         const courses = courseDao.findCoursesForEnrolledUser(userId);
         res.json(courses);
     };
+    app.get("/api/users/:userId/courses", findCoursesForEnrolledUser);
 
     const createCourse = async (req, res) => {
         const currentUser = await req.session["currentUser"];
@@ -159,5 +160,4 @@ export default function UserRoutes(app) {
     app.post("/api/users/signin", signin);
     app.post("/api/users/signout", signout);
     app.post("/api/users/profile", profile);
-    app.get("/api/users/:userId/courses", findCoursesForEnrolledUser);
 }
